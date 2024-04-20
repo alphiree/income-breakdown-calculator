@@ -1,3 +1,8 @@
+"""
+This module provides a class for calculating income and contributions for employees in the
+Philippines.
+"""
+
 import os
 import sys
 from datetime import datetime
@@ -10,6 +15,9 @@ from config.ph_tax import DATA  # pylint: disable=C0413
 
 
 class IncomeCalculator:
+    """
+    A class that calculates income and contributions for employees in the Philippines.
+    """
 
     def __init__(
         self,
@@ -17,6 +25,15 @@ class IncomeCalculator:
         allowance: float,
         night_differential: float | None = None,
     ):
+        """
+        Initialize the IncomeCalculator class.
+
+        Args:
+            basic_salary (float): The basic salary of the employee.
+            allowance (float): The allowance of the employee.
+            night_differential (float, optional): The night differential of the employee. Defaults
+            to None.
+        """
         self.salary = basic_salary
         self.allowance = allowance
         self.night_differential = night_differential
@@ -25,6 +42,15 @@ class IncomeCalculator:
         self.pagibig = PAGIBIG[str(datetime.today().year)]
 
     def salary_credit(self, ref: dict) -> float:
+        """
+        Calculate the salary credit based on the given reference.
+
+        Args:
+            ref (dict): The reference for salary credit calculation.
+
+        Returns:
+            float: The calculated salary credit.
+        """
         if self.salary < ref["Minimum"]:
             return ref["Minimum"]
         elif self.salary > ref["Maximum"]:
@@ -33,6 +59,12 @@ class IncomeCalculator:
             return self.salary
 
     def compute_contributions(self) -> dict:
+        """
+        Compute the contributions for SSS, PhilHealth, and PAGIBIG.
+
+        Returns:
+            dict: A dictionary containing the computed contributions.
+        """
         contributions_provider = {
             "SSS": self.sss,
             "PhilHealth": self.philhealth,
@@ -80,6 +112,15 @@ class IncomeCalculator:
 
     @staticmethod
     def compute_tax(taxable_income: float) -> float:
+        """
+        Compute the tax based on the given taxable income.
+
+        Args:
+            taxable_income (float): The taxable income.
+
+        Returns:
+            float: The computed tax.
+        """
         data = pd.DataFrame(DATA)
         income = taxable_income * 12
         for index, row in data.iterrows():
@@ -94,7 +135,12 @@ class IncomeCalculator:
         return yearly_tax, monthly_tax
 
     def compute_netincome(self) -> dict:
+        """
+        Compute the net income based on the given inputs.
 
+        Returns:
+            dict: A dictionary containing the computed net income and other details.
+        """
         contributions = self.compute_contributions()
         total_employee_contribition = sum(
             [value["Employee Contribution"] for value in contributions.values()]
