@@ -1,3 +1,10 @@
+"""
+This file contains the site configuration for the project
+
+The `div_configs` dictionary stores CSS styles that can be used to hide certain elements on the
+site.
+"""
+
 div_configs = {
     "hide_expander": """
                     <style>

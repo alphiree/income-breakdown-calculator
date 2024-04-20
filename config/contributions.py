@@ -1,3 +1,8 @@
+"""
+This file contains the contribution rates and limits for the Social Security System (SSS),
+Philippine Health Insurance Corporation (PhilHealth), and Pag-IBIG Fund.
+"""
+
 SSS = {
     "2024": {
         "Contribution Rate": 0.14,
