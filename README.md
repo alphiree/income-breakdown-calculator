@@ -1,6 +1,7 @@
 # Income Breakdown Calculator
 
-![image](https://github.com/alphiree/income-breakdown-calculator/assets/119299280/47f13627-f26a-4633-b1e0-9e3969a1897d)
+![Picsart_24-04-20_16-06-05-407](https://github.com/alphiree/income-breakdown-calculator/assets/119299280/adc01c83-4d78-4f61-9742-4f2f4cb1a5ac)
+
 
 ## Description
 
