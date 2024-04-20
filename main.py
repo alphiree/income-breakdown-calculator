@@ -13,6 +13,7 @@ import streamlit as st
 
 from config.site_config import div_configs
 from utils.income_calculator import IncomeCalculator
+from utils.utils import SessionState
 
 ## ======================================================================================= ##
 ## SITE TITLE
@@ -25,7 +26,6 @@ st.set_page_config(
 ## ======================================================================================= ##
 ## SITE CONFIGURATION
 
-# st.markdown(div_configs["hide_expander"], unsafe_allow_html=True)
 st.markdown(div_configs["hide_github_icon"], unsafe_allow_html=True)
 st.markdown(div_configs["hide_streamlit_style"], unsafe_allow_html=True)
 
@@ -39,17 +39,7 @@ features = st.expander("Features", expanded=False)
 contents = st.container()
 results = st.container()
 
-if "button_clicked" not in st.session_state:
-    st.session_state.button_clicked = False
-
-
-def callback():
-    st.session_state.button_clicked = True
-
-
-def go_back():
-    st.session_state.button_clicked = False
-
+button = SessionState(key="button_clicked", default_state=False)
 
 with title:
     st.title(":dollar: PH Income Breakdown Calculator")
@@ -99,11 +89,13 @@ with contents:
 
     income_details = income_calculator.compute_netincome()
 
-    submit_button = st.button(label="Calculate", type="primary", on_click=callback)
+    submit_button = st.button(
+        label="Calculate", type="primary", on_click=button.sessionstate_true
+    )
 
 
 with results:
-    if submit_button or st.session_state.button_clicked:
+    if submit_button or button.check_sessionstate():
         st.subheader("NET INCOME")
         st.markdown(
             f"""
@@ -169,7 +161,7 @@ with results:
             )
             st.markdown(
                 f"""
-            ##### Special Non-Working Holiday (Net): + ₱ {round(daily_basic * .3,2):,} per day
+            ##### Special Non-Working Holiday: + ₱ {round(daily_basic * .3,2):,} per day
             """
             )
 
