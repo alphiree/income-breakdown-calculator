@@ -1,9 +1,27 @@
+"""
+This file contains the classes and functions that is used throughout the project.
+"""
+
 import streamlit as st
 
 
 class SessionState:
+    """
+    Class for managing session state in Streamlit applications.
+    """
 
     def __init__(self, key: str, default_state: bool = False):
+        """
+        Initializes a new instance of the SessionState class.
+
+        Parameters:
+            key (str): The key to identify the session state.
+            default_state (bool): The default state value if the key is not found in the session
+            state.
+
+        Returns:
+            None
+        """
         self.key = key
         self.default_state = default_state
 
@@ -14,9 +32,6 @@ class SessionState:
         """
         Sets the value of the specified key in the session state to True.
 
-        Parameters:
-            key (str): The key to set in the session state.
-
         Returns:
             None
         """
@@ -24,10 +39,7 @@ class SessionState:
 
     def sessionstate_false(self) -> None:
         """
-        Sets the value of the specified key in the session state to True.
-
-        Parameters:
-            key (str): The key to set in the session state.
+        Sets the value of the specified key in the session state to False.
 
         Returns:
             None
@@ -38,9 +50,6 @@ class SessionState:
         """
         Returns the value of the specified key in the session state.
 
-        Parameters:
-            key (str): The key to check in the session state.
-
         Returns:
             bool: The value of the specified key in the session state.
         """
@@ -49,5 +58,8 @@ class SessionState:
     def write_currentstate(self) -> None:
         """
         Writes the current state of the session key.
+
+        Returns:
+            None
         """
         st.write(st.session_state[self.key])
