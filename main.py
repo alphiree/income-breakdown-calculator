@@ -1,3 +1,12 @@
+"""
+This file contains a Streamlit application for computing the net income breakdown for Filipinos.
+
+The application allows users to input their monthly basic income, non-taxable allowance, and choose
+whether to include night differential rate. It then calculates the net income and provides a
+breakdown of the income components including basic salary, allowance, night differential, gross
+income, employee contributions, monthly tax, and monthly net income.
+"""
+
 from datetime import datetime
 
 import streamlit as st
