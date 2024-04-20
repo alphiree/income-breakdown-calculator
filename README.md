@@ -1,5 +1,7 @@
 # Income Breakdown Calculator
 
+![image](https://github.com/alphiree/income-breakdown-calculator/assets/119299280/47f13627-f26a-4633-b1e0-9e3969a1897d)
+
 ## Description
 
 The Income Breakdown Calculator is a website that provides a convenient way for Filipinos to calculate their net income. It offers various options to calculate income breakdowns based on monthly, daily, hourly, and yearly rates. 
