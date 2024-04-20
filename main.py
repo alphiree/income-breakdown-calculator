@@ -16,7 +16,7 @@ st.set_page_config(
 ## SITE CONFIGURATION
 
 # st.markdown(div_configs["hide_expander"], unsafe_allow_html=True)
-# st.markdown(div_configs["hide_github_icon"], unsafe_allow_html=True)
+st.markdown(div_configs["hide_github_icon"], unsafe_allow_html=True)
 st.markdown(div_configs["hide_streamlit_style"], unsafe_allow_html=True)
 
 
