@@ -10,7 +10,7 @@ The Income Breakdown Calculator is a website that provides a convenient way for 
 To run the Income Breakdown Calculator, you have two options:
 
 1. Follow the installation and usage process described below.
-2. Alternatively, you can directly access the website by visiting [this site](https://income-breakdown-calculator.streamlit.app/).
+2. Alternatively, you can directly access the web application [here!](https://phincome.ryanlupague.dev).
 
 Choose the method that suits you best!
 
