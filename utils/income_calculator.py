@@ -53,10 +53,10 @@ class IncomeCalculator:
         """
         if self.salary < ref["Minimum"]:
             return ref["Minimum"]
-        elif self.salary > ref["Maximum"]:
+        if self.salary > ref["Maximum"]:
             return ref["Maximum"]
-        else:
-            return self.salary
+
+        return self.salary
 
     def compute_contributions(self) -> dict:
         """
@@ -111,7 +111,7 @@ class IncomeCalculator:
         return contributions_provider
 
     @staticmethod
-    def compute_tax(taxable_income: float) -> float:
+    def compute_tax(taxable_income: float) -> tuple[float, float]:
         """
         Compute the tax based on the given taxable income.
 
