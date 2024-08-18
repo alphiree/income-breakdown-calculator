@@ -131,9 +131,10 @@ class IncomeCalculator:
                 yearly_tax = round(
                     ((income - excess) * row["Excess"]) + row["Additional"], 2
                 )
-                monthly_tax = round(yearly_tax / 12, 2)
 
-                return yearly_tax, monthly_tax
+                return yearly_tax, round(yearly_tax / 12, 2)
+
+        return 0.0, 0.0
 
     def compute_netincome(self) -> dict:
         """
