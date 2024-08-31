@@ -1,9 +1,9 @@
 [theme]
 ## Theme 1 Dark Theme
-primaryColor="#0d6e6e"
-backgroundColor="#0d1f2d"
-secondaryBackgroundColor="#1d2e3d"
-textColor="#ffffff"
+# primaryColor="#0d6e6e"
+# backgroundColor="#0d1f2d"
+# secondaryBackgroundColor="#1d2e3d"
+# textColor="#ffffff"
 
 ## Dark Gray and yellow theme
 # primaryColor="#da8e0f"
@@ -17,3 +17,14 @@ textColor="#ffffff"
 # secondaryBackgroundColor="#1a1e3b"
 # textColor="#ffffff"
 
+## Dark Purple Theme
+primaryColor="#864879"
+backgroundColor="#1F1D36"
+secondaryBackgroundColor="#3F3351"
+textColor="#ffffff"
+
+## Dark Purple Theme
+# primaryColor="#3C2A21"
+# backgroundColor="#1A120B"
+# secondaryBackgroundColor="#3C2A21"
+# textColor="#ffffff"
