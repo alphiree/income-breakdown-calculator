@@ -2,12 +2,13 @@ FROM python:3.12
 
 RUN apt-get update && apt-get install -y 
 RUN mkdir /home/app
-
-COPY . /home/app
-
 WORKDIR /home/app
 
+## Doing install first to cache the dependencies
+COPY requirements.txt /home/app
 RUN pip install -r requirements.txt
+
+COPY . /home/app
 
 EXPOSE 8501
 
