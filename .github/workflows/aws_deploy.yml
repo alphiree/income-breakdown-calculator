@@ -32,19 +32,19 @@ jobs:
           push: true
           tags: alphire/income-app:latest
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #
-  #   steps:
-  #     - name: SSH to EC2 and Deploy Container
-  #       uses: appleboy/ssh-action@v0.1.6
-  #       with:
-  #         host: ${{ secrets.EC2_HOST }}
-  #         username: ${{ secrets.EC2_USER }}
-  #         key: ${{ secrets.EC2_SSH_KEY }}
-  #         script: |
-  #           docker pull your-dockerhub-username/your-image-name:latest
-  #           docker stop your-container-name || true
-  #           docker rm your-container-name || true
-  #           docker run -d --name your-container-name -p 80:80 your-dockerhub-username/your-image-name:latest
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: SSH to EC2 and Deploy Container
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull alphire/income-app:latest
+            docker stop app || true
+            docker rm app || true
+            docker run -d -p 8501:8501 --name app alphire/income-app:latest
