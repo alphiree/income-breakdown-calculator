@@ -1,0 +1,19 @@
+[theme]
+## Theme 1 Dark Theme
+primaryColor="#0d6e6e"
+backgroundColor="#0d1f2d"
+secondaryBackgroundColor="#1d2e3d"
+textColor="#ffffff"
+
+## Dark Gray and yellow theme
+# primaryColor="#da8e0f"
+# backgroundColor="#1e1e1e"
+# secondaryBackgroundColor="#2d2d2d"
+# textColor="#dcdcdc"
+
+## Dark Blue and yellow theme
+# primaryColor="#ffc107"
+# backgroundColor="#0b0f2b"
+# secondaryBackgroundColor="#1a1e3b"
+# textColor="#ffffff"
+
