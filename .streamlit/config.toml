@@ -18,13 +18,19 @@
 # textColor="#ffffff"
 
 ## Dark Purple Theme
-primaryColor="#864879"
-backgroundColor="#1F1D36"
-secondaryBackgroundColor="#3F3351"
-textColor="#ffffff"
+# primaryColor="#864879"
+# backgroundColor="#1F1D36"
+# secondaryBackgroundColor="#3F3351"
+# textColor="#ffffff"
 
 ## Dark Purple Theme
 # primaryColor="#3C2A21"
 # backgroundColor="#1A120B"
 # secondaryBackgroundColor="#3C2A21"
 # textColor="#ffffff"
+
+## Sleek Green Theme
+primaryColor="#d69d6b"
+backgroundColor="#263531"
+secondaryBackgroundColor="#192421"
+textColor="#D1E8E2"
