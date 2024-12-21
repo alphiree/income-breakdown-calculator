@@ -54,26 +54,26 @@ with title:
 with contents:
     basic_salary = st.number_input(
         label="Monthly Basic Income (PHP)",
-        min_value=1000,
+        min_value=1000.0,
         max_value=None,
         value="min",
-        step=1000,
+        step=1000.0,
     )
     allowance = st.number_input(
         label="Non-Taxable Allowance (De-minimis) (PHP)",
-        min_value=0,
+        min_value=0.0,
         max_value=None,
         value="min",
-        step=1000,
+        step=1000.0,
     )
     nightdf_allow = st.checkbox("Night Differential Rate?")
     if nightdf_allow:
         night_differential_rate = st.number_input(
             label="Night Differential Rate (%)",
-            min_value=0,
-            max_value=100,
+            min_value=0.0,
+            max_value=100.0,
             value="min",
-            step=1,
+            step=1.0,
         )
         night_differential_value = basic_salary * (night_differential_rate / 100)
         income_calculator = IncomeCalculator(
