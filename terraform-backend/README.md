@@ -14,7 +14,6 @@ terraform init
 
 ```bash
 terraform import aws_s3_bucket.terraform_state rylupague-tf-state-bucket
-terraform import aws_dynamodb_table.terraform_locks terraform-locks
 terraform import aws_s3_bucket_server_side_encryption_configuration.encryption rylupague-tf-state-bucket
 terraform import aws_s3_bucket_versioning.versioning rylupague-tf-state-bucket
 ```
