@@ -101,10 +101,10 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --comment "Deploy Docker container" \
             --parameters "commands=[
-              \"docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest\",
+              \"docker pull ${{ secrets.DOCKERHUB_USERNAME }}/income-app:latest\",
               \"docker stop app || true\",
               \"docker rm app || true\",
-              \"docker run -d -p 80:80 --restart unless-stopped --name app ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest\"
+              \"docker run -d -p 80:8501 --restart unless-stopped --name app ${{ secrets.DOCKERHUB_USERNAME }}/income-app:latest\"
             ]" \
             --query "Command.CommandId" \
             --output text)
