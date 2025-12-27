@@ -1,6 +1,5 @@
 provider "aws" {
   region = var.aws_region
-  profile = "ryan"
 }
 
 data "aws_ami" "ubuntu" {
