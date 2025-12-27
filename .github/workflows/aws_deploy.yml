@@ -47,9 +47,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug paths
-        run: pwd && ls
-
       - name: Terraform Init
         working-directory: terraform
         run: terraform init
