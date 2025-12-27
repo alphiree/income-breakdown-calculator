@@ -4,3 +4,15 @@ Pipfile.lock
 *ipynb_checkpoints/
 *ipynb
 .venv
+
+.env
+
+
+## Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform.tfstate.lock.info
+crashes/
+.terraform.d/
