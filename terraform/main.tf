@@ -42,6 +42,25 @@ resource "aws_instance" "app" {
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
+  user_data = <<-EOF
+    #!/bin/bash
+    set -eux
+
+    apt-get update -y
+    apt-get install -y \
+      ca-certificates \
+      curl \
+      gnupg \
+      lsb-release
+
+    curl -fsSL https://get.docker.com | sh
+
+    systemctl enable docker
+    systemctl start docker
+
+    usermod -aG docker ubuntu
+  EOF
+
   tags = {
     Name = "ssm-docker-app"
   }
