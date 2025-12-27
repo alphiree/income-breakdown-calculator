@@ -63,31 +63,54 @@ jobs:
       # --------------------
       # Deploy via SSM
       # --------------------
+      # - name: Deploy container via SSM
+      #   run: |
+      #     aws ssm send-command \
+      #       --instance-ids "$INSTANCE_ID" \
+      #       --document-name "AWS-RunShellScript" \
+      #       --parameters 'commands=[
+      #         "docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest",
+      #         "docker stop app || true",
+      #         "docker rm app || true",
+      #         "docker run -d -p 80:80 --name app ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest"
+      #       ]'
+
       - name: Deploy container via SSM
+        shell: bash
         run: |
-          aws ssm send-command \
+          set -e
+          COMMAND_ID=$(aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
-            --parameters 'commands=[
-              "docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest",
-              "docker stop app || true",
-              "docker rm app || true",
-              "docker run -d -p 80:80 --name app ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest"
-            ]'
+            --comment "Deploy Docker container" \
+            --parameters "commands=[
+              \"docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest\",
+              \"docker stop app || true\",
+              \"docker rm app || true\",
+              \"docker run -d -p 80:80 --restart unless-stopped --name app ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest\"
+            ]" \
+            --query "Command.CommandId" \
+            --output text)
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #
-  #   steps:
-  #     - name: SSH to EC2 and Deploy Container
-  #       uses: appleboy/ssh-action@v0.1.6
-  #       with:
-  #         host: ${{ secrets.EC2_HOST }}
-  #         username: ${{ secrets.EC2_USER }}
-  #         key: ${{ secrets.EC2_SSH_KEY }}
-  #         script: |
-  #           docker pull alphire/income-app:latest
-  #           docker stop app || true
-  #           docker rm app || true
-  #           docker run -d -p 8501:8501 --name app alphire/income-app:latest
+          echo "SSM Command ID: $COMMAND_ID"
+
+          # Wait for command to finish
+          STATUS="Pending"
+          while [[ "$STATUS" == "Pending" || "$STATUS" == "InProgress" ]]; do
+            sleep 5
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$COMMAND_ID" \
+              --instance-id "$INSTANCE_ID" \
+              --query "Status" \
+              --output text)
+            echo "Current status: $STATUS"
+          done
+
+          if [[ "$STATUS" != "Success" ]]; then
+            echo "SSM command failed"
+            aws ssm get-command-invocation \
+              --command-id "$COMMAND_ID" \
+              --instance-id "$INSTANCE_ID"
+            exit 1
+          fi
+          echo "Deployment succeeded"
