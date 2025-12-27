@@ -82,12 +82,6 @@ jobs:
             sleep 10
           done
 
-          # Wait for the cloud-init (user data definition) to finish
-          while [ ! -f /var/lib/cloud/instance/boot-finished ]; do
-            echo "Waiting for cloud-init to finish..."
-            sleep 5
-          done
-
           COMMAND_ID=$(aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
