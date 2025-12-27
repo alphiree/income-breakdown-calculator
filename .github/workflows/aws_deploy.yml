@@ -79,6 +79,23 @@ jobs:
         shell: bash
         run: |
           set -e
+
+          echo "Waiting for instance to be ready in SSM..."
+
+          while true; do
+            SSM_STATUS=$(aws ssm describe-instance-information \
+              --query "InstanceInformationList[?InstanceId=='$INSTANCE_ID'].PingStatus" \
+              --output text)
+
+            if [[ "$SSM_STATUS" == "Online" ]]; then
+              echo "Instance is online in SSM"
+              break
+            fi
+
+            echo "SSM not ready yet. Current status: ${SSM_STATUS:-NotRegistered}"
+            sleep 10
+          done
+
           COMMAND_ID=$(aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
